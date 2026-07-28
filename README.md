@@ -76,7 +76,7 @@ docker-compose up --build -d
 **Flag:**
 ```diff
 + CATF{upload_01_unrestricted_upload_saly_alal_ELNABY}
-
+```
 
 ---
 
@@ -94,7 +94,10 @@ docker-compose up --build -d
 5. The server accepts the file because it trusts the forged header
 6. Access `http://localhost:8089/uploads2/shell.php?cmd=whoami`
 
-**Flag:** `CATF{upload_02_content_type_bypass_saly_alal_ELNABY}`
+**Flag:**
+```diff
++ CATF{upload_02_content_type_bypass_saly_alal_ELNABY}
+```
 
 ---
 
@@ -111,7 +114,10 @@ docker-compose up --build -d
 4. The file gets written to the web root instead of `uploads3/avatars/`
 5. Access `http://localhost:8089/shell.php?cmd=whoami`
 
-**Flag:** `CATF{upload_03_path_traversal_saly_alal_ELNABY}`
+**Flag:**
+```diff
++ CATF{upload_03_path_traversal_saly_alal_ELNABY}
+```
 
 ---
 
@@ -129,7 +135,10 @@ docker-compose up --build -d
 5. The server executes it as PHP because of the `.htaccess` rule
 6. Access `http://localhost:8089/uploads4/shell.PHP?cmd=whoami`
 
-**Flag:** `CATF{upload_04_blacklist_bypass_saly_alal_ELNABY}`
+**Flag:**
+```diff
++ CATF{upload_04_blacklist_bypass_saly_alal_ELNABY}
+```
 
 ---
 
@@ -147,7 +156,10 @@ docker-compose up --build -d
 5. Apache sees `.php` in the filename and executes it as PHP
 6. Access `http://localhost:8089/uploads5/shell.php.jpg?cmd=whoami`
 
-**Flag:** `CATF{upload_05_obfuscated_extension_saly_alal_ELNABY}`
+**Flag:**
+```diff
++ CATF{upload_05_obfuscated_extension_saly_alal_ELNABY}
+```
 
 ---
 
@@ -166,7 +178,10 @@ docker-compose up --build -d
 6. Apache executes it as PHP because of the `.php` extension
 7. Access `http://localhost:8089/uploads6/shell.php?cmd=whoami`
 
-**Flag:** `CATF{upload_06_polyglot_upload_saly_alal_ELNABY}`
+**Flag:**
+```diff
++ CATF{upload_06_polyglot_upload_saly_alal_ELNABY}
+```
 
 ---
 
@@ -183,7 +198,10 @@ docker-compose up --build -d
 4. One of the requests will hit the file during the 1-second window before deletion
 5. The shell executes before the cleanup process removes it
 
-**Flag:** `CATF{upload_07_race_condition_saly_alal_ELNABY}`
+**Flag:**
+```diff
++ CATF{upload_07_race_condition_saly_alal_ELNABY}
+```
 
 ---
 
