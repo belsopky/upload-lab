@@ -1,9 +1,14 @@
+
 # UploadLab
 
-> Professional CTF Training Lab for File Upload Vulnerabilities
+> Professional Dockerized CTF laboratory designed to teach and practice real-world File Upload Vulnerabilities through realistic web applications progressive challenges and hands-on exploitation
 
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](https://hub.docker.com/r/haqtor/upload-lab)
+[![PHP](https://img.shields.io/badge/PHP-8.2-purple?logo=php)]()
+[![Apache](https://img.shields.io/badge/Apache-2.4-red?logo=apache)]()
+[![SQLite](https://img.shields.io/badge/SQLite-3-blue?logo=sqlite)]()
 [![Version](https://img.shields.io/badge/Version-v4.1-red)]()
+[![License](https://img.shields.io/badge/License-MIT-green)]()
 [![Challenges](https://img.shields.io/badge/Challenges-7-green)]()
 [![Points](https://img.shields.io/badge/Total%20Points-700-orange)]()
 
@@ -11,26 +16,50 @@
 
 ## Table of Contents
 
+- [Overview](#overview)
 - [Quick Start](#quick-start)
+- [Why UploadLab](#why-uploadlab)
 - [Challenges](#challenges)
 - [Challenge Write-ups](#challenge-write-ups)
+- [Learning Objectives](#learning-objectives)
 - [Features](#features)
 - [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [How to Defend](#how-to-defend)
 - [Accounts](#accounts)
 - [Docker Hub](#docker-hub)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [License](#license)
 - [Author](#author)
+
+---
+
+## Overview
+
+| Item | Value |
+|:-----|:------|
+| Challenges | 7 |
+| Difficulty | Easy to Hard |
+| Platform | Docker |
+| Backend | PHP 8.2 |
+| Database | SQLite |
+| Total Points | 700 |
+| Target Audience | CTF Players Students Pentesters |
+| Estimated Time | 1 to 3 Hours |
 
 ---
 
 ## Quick Start
 
-### Using Docker Hub (Recommended)
+### Pull from Docker Hub
 
 ```bash
+docker pull haqtor/upload-lab:v4.1
 docker run -d -p 8089:80 haqtor/upload-lab:v4.1
 ```
 
-Then open http://localhost:8089
+Open http://localhost:8089
 
 ### Build from Source
 
@@ -42,17 +71,30 @@ docker-compose up --build -d
 
 ---
 
+## Why UploadLab
+
+- 7 Realistic Upload Vulnerabilities based on real-world scenarios
+- Docker Ready one command to start
+- PHP + Apache + SQLite stack
+- Real exploitation scenarios not just theory
+- Built-in scoreboard with progress tracking
+- Reset functionality for repeated practice
+- Flags only appear after successful exploitation
+- Toggleable hints for guided learning
+
+---
+
 ## Challenges
 
-| ID | Challenge | Vulnerability | Points | Difficulty |
-|:--:|:----------|:--------------|:------:|:----------:|
-| 1 | Unrestricted Upload | No validation | 100 | Easy |
-| 2 | Content-Type Bypass | Client-side header trust | 100 | Easy |
-| 3 | Path Traversal | Directory traversal in filename | 100 | Medium |
-| 4 | Blacklist Bypass | Case-sensitive extension filter | 100 | Medium |
-| 5 | Obfuscated Extension | Double extension parsing | 100 | Medium |
-| 6 | Polyglot Upload | Magic bytes bypass | 100 | Hard |
-| 7 | Race Condition | Time-of-check time-of-use | 100 | Hard |
+| ID | Challenge | Category | Vulnerability | Points | Difficulty |
+|:--:|:----------|:---------|:--------------|:------:|:----------:|
+| 1 | Unrestricted Upload | Web Security | No validation | 100 | Easy |
+| 2 | Content-Type Bypass | Web Security | Client-side header trust | 100 | Easy |
+| 3 | Path Traversal | Web Security | Directory traversal in filename | 100 | Medium |
+| 4 | Blacklist Bypass | Web Security | Case-sensitive extension filter | 100 | Medium |
+| 5 | Obfuscated Extension | Web Security | Double extension parsing | 100 | Medium |
+| 6 | Polyglot Upload | Web Security | Magic bytes bypass | 100 | Hard |
+| 7 | Race Condition | Web Security | Time-of-check time-of-use | 100 | Hard |
 
 **Total: 700 Points**
 
@@ -64,7 +106,7 @@ docker-compose up --build -d
 
 **Vulnerability:** Remote Code Execution (RCE) via unrestricted file upload
 
-**Scenario:** The upload endpoint performs absolutely no validation on file type extension or content Any file uploaded is saved directly to the server and accessible via URL
+**Scenario:** The upload endpoint performs absolutely no validation on file type extension or content. Any file uploaded is saved directly to the server and becomes publicly accessible via URL.
 
 **Exploitation:**
 1. Create a PHP web shell: `<?php system($_GET['cmd']); ?>`
@@ -84,7 +126,7 @@ docker-compose up --build -d
 
 **Vulnerability:** Trusting client-provided Content-Type header
 
-**Scenario:** The server validates uploads by checking `$_FILES['file']['type']` only This value comes from the browser and can be easily forged The server does not verify actual file content or extension
+**Scenario:** The server validates uploads by checking `$_FILES['file']['type']` only. This value comes from the browser and can be easily forged. The server does not verify actual file content or extension.
 
 **Exploitation:**
 1. Create a PHP shell named `shell.php`
@@ -105,7 +147,7 @@ docker-compose up --build -d
 
 **Vulnerability:** Path traversal in multipart filename parameter
 
-**Scenario:** The avatar upload page uses the raw `full_path` from the multipart request as the filename without any sanitization The path is prepended to `uploads3/avatars/` By controlling the filename an attacker can write files anywhere on the server
+**Scenario:** The avatar upload page uses the raw `full_path` from the multipart request as the filename without any sanitization. The path is prepended to `uploads3/avatars/`. By controlling the filename an attacker can write files anywhere on the server.
 
 **Exploitation:**
 1. Login with any account (wiener/peter)
@@ -125,7 +167,7 @@ docker-compose up --build -d
 
 **Vulnerability:** Case-sensitive extension blacklist
 
-**Scenario:** The application blocks dangerous extensions (php php3 php4 php5 phtml pht) but only checks lowercase variations The server is explicitly configured via `.htaccess` to execute `.PHP` (uppercase) files as PHP
+**Scenario:** The application blocks dangerous extensions (php php3 php4 php5 phtml pht) but only checks lowercase variations. The server is explicitly configured via `.htaccess` to execute `.PHP` (uppercase) files as PHP.
 
 **Exploitation:**
 1. Create a PHP shell
@@ -146,7 +188,7 @@ docker-compose up --build -d
 
 **Vulnerability:** Double extension with Apache AddHandler misconfiguration
 
-**Scenario:** The application validates only the final extension using `pathinfo(... PATHINFO_EXTENSION)` A file named `shell.php.jpg` passes because `.jpg` is allowed However the server uses `AddHandler application/x-httpd-php .php` which causes Apache to execute any file containing `.php` in its name regardless of the final extension
+**Scenario:** The application validates only the final extension using `pathinfo(... PATHINFO_EXTENSION)`. A file named `shell.php.jpg` passes because `.jpg` is allowed. However the server uses `AddHandler application/x-httpd-php .php` which causes Apache to execute any file containing `.php` in its name regardless of the final extension.
 
 **Exploitation:**
 1. Create a PHP shell
@@ -167,7 +209,7 @@ docker-compose up --build -d
 
 **Vulnerability:** Insufficient image validation using `getimagesize()`
 
-**Scenario:** The server uses `getimagesize()` to verify the file starts with valid image magic bytes This function only checks the file header not the entire content A polyglot file that starts with image bytes but contains PHP code will pass validation
+**Scenario:** The server uses `getimagesize()` to verify the file starts with valid image magic bytes. This function only checks the file header not the entire content. A polyglot file that starts with image bytes but contains PHP code will pass validation.
 
 **Exploitation:**
 1. Create a file that starts with GIF magic bytes: `GIF89a;`
@@ -189,7 +231,7 @@ docker-compose up --build -d
 
 **Vulnerability:** Time-of-check time-of-use (TOCTOU)
 
-**Scenario:** The file is written to disk immediately then scanned after a 1-second delay If the scan fails the file is deleted There is a 1-second window where the file exists on disk and can be accessed before deletion
+**Scenario:** The file is written to disk immediately then scanned after a 1-second delay. If the scan fails the file is deleted. There is a 1-second window where the file exists on disk and can be accessed before deletion.
 
 **Exploitation:**
 1. Create a PHP shell named `shell.php`
@@ -205,9 +247,24 @@ docker-compose up --build -d
 
 ---
 
+## Learning Objectives
+
+After completing this lab you will understand:
+
+- File upload validation mistakes
+- MIME Type bypasses
+- Extension blacklist bypass techniques
+- Path Traversal in file uploads
+- Double Extension attacks
+- Polyglot payload construction
+- TOCTOU Race Conditions
+- Secure upload implementation best practices
+
+---
+
 ## Features
 
-- Flags appear only after actual shell execution (not just upload)
+- Flags appear only after actual shell execution not just upload
 - Real-time challenge status tracking
 - Scoring system with progress bar (0-700 points)
 - Toggleable hints per challenge
@@ -220,13 +277,79 @@ docker-compose up --build -d
 
 ## Architecture
 
-| Component | Technology |
-|:----------|:-----------|
-| Backend | PHP 8.2 |
-| Database | SQLite |
-| Web Server | Apache |
-| Container | Docker |
-| OS Base | Debian |
+```
+Browser
+    |
+    v
+Apache (Port 80)
+    |
+    v
+PHP 8.2
+    |
+    v
+SQLite
+    |
+    v
+Filesystem (uploads/)
+    |
+    v
+Flags (after execution)
+```
+
+---
+
+## Project Structure
+
+```
+upload-lab/
+├── Dockerfile
+├── docker-compose.yml
+├── README.md
+├── LICENSE
+└── src/
+    ├── .htaccess
+    ├── config.php
+    ├── prepend.php
+    ├── index.php
+    ├── login.php
+    ├── logout.php
+    ├── dashboard.php
+    ├── scenarios.php
+    ├── completion.php
+    ├── reset.php
+    ├── style.css
+    ├── upload1.php
+    ├── upload2.php
+    ├── upload3.php
+    ├── upload4.php
+    ├── upload5.php
+    ├── upload6.php
+    ├── upload7.php
+    ├── uploads1/
+    ├── uploads2/
+    ├── uploads3/
+    │   └── avatars/
+    ├── uploads4/
+    ├── uploads5/
+    ├── uploads6/
+    ├── uploads7/
+    ├── .markers/
+    └── .uploads/
+```
+
+---
+
+## How to Defend
+
+- Validate file extensions against a whitelist not blacklist
+- Validate MIME type on the server side not client side
+- Verify magic bytes for expected file types
+- Store uploaded files outside the web root
+- Rename uploaded files with random names
+- Disable script execution in upload directories
+- Use antivirus scanning for uploaded files
+- Apply least privilege permissions on upload folders
+- Implement rate limiting on upload endpoints
 
 ---
 
@@ -248,7 +371,25 @@ Pull the latest image:
 docker pull haqtor/upload-lab:v4.1
 ```
 
-https://hub.docker.com/r/haqtor/upload-lab
+[Docker Hub Repository](https://hub.docker.com/r/haqtor/upload-lab)
+
+---
+
+## Screenshots
+
+Add screenshots here
+
+---
+
+## Contributing
+
+PRs are welcome. Feel free to open issues and contribute new challenges.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
@@ -258,10 +399,16 @@ https://hub.docker.com/r/haqtor/upload-lab
 
 - Junior Penetration Tester
 - Bug Bounty Hunter
+- [GitHub](https://github.com/belsopky)
 - [LinkedIn](https://www.linkedin.com/in/bassam-elsopky-814ba1331/)
+- [Docker Hub](https://hub.docker.com/r/haqtor/upload-lab)
+
+---
+
+If this project helped you consider giving it a star
 
 ---
 
 ## Disclaimer
 
-This project is for educational purposes only Do not use on any system you do not own or have explicit permission to test
+This project is for educational purposes only. Do not use on any system you do not own or have explicit permission to test
