@@ -1,0 +1,8 @@
+services:
+  upload-lab:
+    build: .
+    image: haqtor/upload-lab:v4
+    container_name: upload-lab
+    ports:
+      - "8089:80"
+    restart: unless-stopped

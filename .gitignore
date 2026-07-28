@@ -1,0 +1,19 @@
+# Docker
+*.tar
+*.img
+
+# Database
+src/db.sqlite
+
+# Uploads (user generated)
+src/uploads*/
+src/.markers/
+src/.uploads/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

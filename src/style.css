@@ -1,0 +1,240 @@
+*{box-sizing:border-box;}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:#1e1e1e;
+    color:#ddd;
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+header{
+    background:#111;
+    padding:18px 25px;
+    border-bottom:2px solid #b30000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+header h1{margin:0;font-size:20px;color:#fff;}
+
+.score-badge{
+    background:#2a2a2a;
+    border:1px solid #b30000;
+    color:#ff8080;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+    font-family:monospace;
+}
+.score-badge.complete{
+    background:#123d1f;
+    border-color:#1f6b33;
+    color:#4dff4d;
+}
+
+nav{
+    background-color:#191919;
+    padding:10px 25px;
+    border-bottom:1px solid #333;
+}
+nav a{color:#ccc;text-decoration:none;margin-right:18px;font-size:14px;}
+nav a:hover{color:#ff4d4d;}
+
+main{flex:1;padding:40px 20px;}
+
+.card{
+    max-width:520px;
+    margin:0 auto;
+    background-color:#2a2a2a;
+    padding:25px 30px;
+    border-radius:6px;
+    border:1px solid #444;
+}
+.card.wide{max-width:800px;}
+.card h2{margin-top:0;color:#fff;}
+
+label{display:block;margin-top:12px;margin-bottom:4px;font-size:14px;}
+
+input[type=text],input[type=password],input[type=file]{
+    width:100%;
+    padding:8px;
+    background-color:#1e1e1e;
+    border:1px solid #555;
+    color:#fff;
+    border-radius:4px;
+}
+
+button{
+    margin-top:18px;
+    padding:9px 16px;
+    background-color:#b30000;
+    color:#fff;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:14px;
+}
+button:hover{background-color:#d40000;}
+
+.msg.error{margin-top:10px;padding:8px 10px;border-radius:4px;font-size:13px;background-color:#4a1414;border:1px solid #7a1f1f;color:#ffb3b3;}
+.msg.success{margin-top:10px;padding:8px 10px;border-radius:4px;font-size:13px;background-color:#123d1f;border:1px solid #1f6b33;color:#b3ffc2;}
+.msg.flag{margin-top:10px;padding:10px 12px;border-radius:4px;font-size:14px;background-color:#1a1a3d;border:1px solid #4d4dff;color:#b3b3ff;font-family:monospace;}
+.small{font-size:12px;color:#999;margin-top:14px;}
+.small a{color:#ff8080;}
+
+.next-challenge{margin-top:20px;text-align:center;}
+.next-challenge a{
+    display:inline-block;
+    padding:10px 20px;
+    background-color:#2a2a2a;
+    border:1px solid #b30000;
+    color:#ff8080;
+    text-decoration:none;
+    border-radius:4px;
+    font-size:14px;
+}
+.next-challenge a:hover{background-color:#b30000;color:#fff;}
+
+table{width:100%;border-collapse:collapse;margin-top:15px;}
+table td,table th{border:1px solid #444;padding:7px 10px;font-size:13px;}
+table th{background-color:#1e1e1e;color:#aaa;}
+table a{color:#ff8080;text-decoration:none;}
+
+.scenario-box{
+    background:#1e1e1e;
+    border:1px solid #444;
+    border-radius:6px;
+    padding:16px 18px;
+    margin-bottom:16px;
+}
+.scenario-box h3{margin:0 0 6px 0;color:#ff8080;font-size:15px;}
+.scenario-box p{margin:4px 0;font-size:13px;color:#aaa;}
+.scenario-box .start-link{display:inline-block;margin-top:8px;color:#ff8080;text-decoration:none;font-size:13px;font-weight:bold;}
+.scenario-box .start-link:hover{color:#ff4d4d;}
+
+.challenge-section{margin:16px 0;padding:14px 16px;background:#222;border-radius:6px;border:1px solid #333;}
+.challenge-section h3{margin:0 0 10px;color:#ff8080;font-size:15px;}
+.challenge-section p{margin:6px 0;font-size:13px;color:#ccc;line-height:1.5;}
+.challenge-section code{background:#111;padding:2px 5px;border-radius:3px;color:#ff8080;font-family:monospace;font-size:12px;}
+
+.hint-btn{background:#2a2a2a;border:1px solid #555;color:#ccc;padding:7px 14px;margin:6px 6px 6px 0;cursor:pointer;border-radius:4px;font-size:13px;display:inline-block;}
+.hint-btn:hover{background:#3a3a3a;border-color:#777;}
+.hint-box{display:none;margin-top:10px;padding:12px;background:#1a1a1a;border-left:3px solid #b30000;color:#ccc;font-size:13px;line-height:1.5;}
+
+.status-box{margin-top:15px;padding:12px;background:#1e1e1e;border:1px solid #444;border-radius:4px;font-size:13px;color:#ccc;}
+.status-box.executed{background:#123d1f;border-color:#1f6b33;color:#b3ffc2;}
+
+.status-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 14px;
+    margin:6px 0;
+    background:#1e1e1e;
+    border:1px solid #333;
+    border-radius:6px;
+    font-size:14px;
+}
+.status-item .status-label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.status-item .status-badge{
+    font-size:11px;
+    padding:3px 10px;
+    border-radius:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+
+.status-badge.not_started{background:#2a2a2a;color:#888;border:1px solid #444;}
+.status-badge.in_progress{background:#3d3d1a;color:#ffcc00;border:1px solid #665c1a;}
+.status-badge.completed{background:#123d1f;color:#4dff4d;border:1px solid #1f6b33;}
+
+.reset-link{display:inline-block;margin-top:12px;color:#ff8080;font-size:13px;}
+
+
+
+
+
+.completion-container{
+    text-align:center;
+    padding:40px 20px;
+}
+.completion-container h1{
+    font-size:36px;
+    color:#4dff4d;
+    margin-bottom:10px;
+}
+.completion-container .score-big{
+    font-size:48px;
+    color:#ff8080;
+    font-family:monospace;
+    margin:20px 0;
+}
+.completion-container .trophy{
+    font-size:64px;
+    margin:20px 0;
+}
+.completion-container p{
+    font-size:16px;
+    color:#ccc;
+    max-width:500px;
+    margin:10px auto;
+    line-height:1.6;
+}
+.completion-container .btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 28px;
+    background:#b30000;
+    color:#fff;
+    text-decoration:none;
+    border-radius:6px;
+    font-size:15px;
+}
+.completion-container .btn:hover{background:#d40000;}
+
+
+
+
+
+
+
+
+.progress-bar-container{
+    width:100%;
+    height:20px;
+    background:#1e1e1e;
+    border:1px solid #444;
+    border-radius:10px;
+    overflow:hidden;
+    margin:10px 0;
+}
+.progress-bar-fill{
+    height:100%;
+    background:linear-gradient(90deg, #b30000, #ff4d4d);
+    transition:width 0.5s ease;
+}
+
+footer{
+    background-color:#111;
+    color:#777;
+    text-align:center;
+    padding:14px;
+    font-size:12px;
+    border-top:1px solid #333;
+}
+
+
+
+
+
+
