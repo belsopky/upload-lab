@@ -73,8 +73,9 @@ docker-compose up --build -d
 4. Navigate to `http://localhost:8089/uploads1/shell.php?cmd=whoami`
 5. The shell executes proving RCE
 
-**Flag:** `CATF{upload_01_unrestricted_upload_saly_alal_ELNABY}`
-
+**Flag:**
+```diff
++ CATF{upload_01_unrestricted_upload_saly_alal_ELNABY}
 ---
 
 ### Challenge 2: Content-Type Bypass
