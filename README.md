@@ -117,7 +117,7 @@ docker-compose up --build -d
 
 **Flag:**
 ```diff
-+ CATF{upload_01_unrestricted_upload_saly_alal_ELNABY}
++ CATF{upload_01_unrestricted_upload_saly_3ala_ELNABY}
 ```
 
 ---
@@ -138,7 +138,7 @@ docker-compose up --build -d
 
 **Flag:**
 ```diff
-+ CATF{upload_02_content_type_bypass_saly_alal_ELNABY}
++ CATF{upload_02_content_type_bypass_saly_3ala_ELNABY}
 ```
 
 ---
@@ -158,7 +158,7 @@ docker-compose up --build -d
 
 **Flag:**
 ```diff
-+ CATF{upload_03_path_traversal_saly_alal_ELNABY}
++ CATF{upload_03_path_traversal_saly_3ala_ELNABY}
 ```
 
 ---
@@ -179,7 +179,7 @@ docker-compose up --build -d
 
 **Flag:**
 ```diff
-+ CATF{upload_04_blacklist_bypass_saly_alal_ELNABY}
++ CATF{upload_04_blacklist_bypass_saly_3ala_ELNABY}
 ```
 
 ---
@@ -200,7 +200,7 @@ docker-compose up --build -d
 
 **Flag:**
 ```diff
-+ CATF{upload_05_obfuscated_extension_saly_alal_ELNABY}
++ CATF{upload_05_obfuscated_extension_saly_3ala_ELNABY}
 ```
 
 ---
@@ -222,7 +222,7 @@ docker-compose up --build -d
 
 **Flag:**
 ```diff
-+ CATF{upload_06_polyglot_upload_saly_alal_ELNABY}
++ CATF{upload_06_polyglot_upload_saly_3ala_ELNABY}
 ```
 
 ---
