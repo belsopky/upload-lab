@@ -235,10 +235,9 @@ https://hub.docker.com/r/haqtor/upload-lab
 
 **Bassam Elsopky (HaQtor)**
 
-- Cybersecurity Student
 - Junior Penetration Tester
 - Bug Bounty Hunter
-- Python Developer
+- [LinkedIn](https://www.linkedin.com/in/bassam-elsopky-814ba1331/)
 
 ---
 
